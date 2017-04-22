@@ -3,16 +3,16 @@ from sqlalchemy.orm import sessionmaker, relationship
 from sqlalchemy.ext.declarative import declarative_base
 from . import app
 
+from sqlalchemy import Column, Integer, String, ForeignKey, Sequence
+from sqlalchemy.orm import relationship
+from sqlalchemy.ext.declarative import declarative_base
+
+from marshmallow import Schema, fields, pprint
+
 engine = create_engine(app.config["DATABASE_URI"])
 Base = declarative_base()
 Session = sessionmaker(bind=engine)
 session = Session()
-
-
-
-from sqlalchemy import Column, Integer, String, ForeignKey, Sequence
-from sqlalchemy.orm import relationship
-from sqlalchemy.ext.declarative import declarative_base
 
 class Song(Base):
     __tablename__='songs'
@@ -41,5 +41,15 @@ class File(Base):
             'song_id': self.song_id
         }
         return file
+
+class FileSchema(Schema):
+    id = fields.Integer()
+    name = fields.String()
+
+
+class SongSchema(Schema):
+    id = fields.Integer()
+    file = fields.Nested(FileSchema)
+
 
 Base.metadata.create_all(engine)
