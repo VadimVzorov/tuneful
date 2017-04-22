@@ -13,6 +13,7 @@ from .utils import upload_path
 @decorators.accept("application/json")
 def get_songs():
 
-    songs = session.query(Song)
-    songs = songs.order_by(Song.file.name)
-    data = json.dumps()
+    pass
+    # songs = session.query(Song)
+    # songs = songs.order_by(Song.file.name)
+    # data = json.dumps()
