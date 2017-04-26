@@ -4,7 +4,8 @@ from jsonschema import validate, ValidationError
 from flask import render_template, request, Response, url_for
 
 from tuneful import app
-from .database import session, Song, File, SongSchema, FileSchema
+from .database import session
+from .models import Song, File, SongSchema, FileSchema
 
 class ComplexEncoder(json.JSONEncoder):
      def default(self, obj):
@@ -16,5 +17,4 @@ class ComplexEncoder(json.JSONEncoder):
 
 @app.route("/")
 def index():
-    import pdb; pdb.set_trace()
     return app.send_static_file("index.html")
