@@ -35,6 +35,7 @@ def get_song(name):
 @decorators.require("application/json")
 def post_songs():
     data = request.json
+    import pdb; pdb.set_trace()
     name = data['file']['name']
     song = Song()
     file = File(name = name, song = song)

@@ -5,7 +5,7 @@ from .database import Base
 from sqlalchemy import Column, Integer, String, ForeignKey, Sequence
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
-
+from flask import url_for
 class Song(Base):
     __tablename__='songs'
 
@@ -30,7 +30,8 @@ class File(Base):
         file = {
             'id': self.id,
             'name': self.name,
-            'song_id': self.song_id
+            'song_id': self.song_id,
+            'path': url_for("uploaded_file", filename=self.name)
         }
         return file
 

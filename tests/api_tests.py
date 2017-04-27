@@ -149,7 +149,6 @@ class TestAPI(unittest.TestCase):
         self.assertEqual(response.mimetype, "application/json")
 
         data = json.loads(response.data.decode("ascii"))
-        import pdb; pdb.set_trace()
         self.assertEqual(urlparse(data["path"]).path, "/uploads/test.txt")
 
         path = upload_path("test.txt")
